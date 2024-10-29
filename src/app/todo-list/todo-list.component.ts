@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import {ToDo} from '../shared/interfaces/todo.interface';
 
 @Component({
@@ -7,7 +7,9 @@ import {ToDo} from '../shared/interfaces/todo.interface';
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    NgStyle,
+    NgClass
   ],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
@@ -35,5 +37,13 @@ export class TodoListComponent {
 
   clearErrorMessage() {
     this.errorMessage = '';
+  }
+
+  removeDoneTodos() {
+    this.todos = this.todos.filter(todo => !todo.isComplete);
+  }
+
+  removeTodo(i: number) {
+    this.todos.splice(i, 1);
   }
 }
